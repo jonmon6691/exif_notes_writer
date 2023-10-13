@@ -105,7 +105,8 @@ for i, image in image_list:
     cmd += f'-DateTime="{dt_string}" -DateTimeOriginal="{dt_string}" '
 
     if "shutter" in frame:
-        cmd += f'-ShutterSpeedValue="{frame["shutter"]}" -ExposureTime="{frame["shutter"]}" '
+        shutter_val = frame["shutter"].replace('"','')
+        cmd += f'-ShutterSpeedValue="{shutter_val}" -ExposureTime="{shutter_val}" '
     
     if "aperture" in frame:
         cmd += f'-ApertureValue="{frame["aperture"]}" -FNumber="{frame["aperture"]}" '
