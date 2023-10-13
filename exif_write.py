@@ -11,7 +11,6 @@ cmd_base = "exiftool -m "
 
 parser = argparse.ArgumentParser(
 	description='Generates exiftool commands given a json export of the Exif Notes app. Images to modify are assumed to be in the same folder as the json file. Their names should be of the format rXXX_NN.tif, where XXX is the roll number, and NN is the frame number matching the count field in the exif notes app.')
-parser.add_argument('--reverse', required=False, action='store_true', help='Reverse the order of the images')
 parser.add_argument('path', metavar='PATH', help='The json file to process. Should be stored in the same folder as the scans.')
 
 args = parser.parse_args()
@@ -30,7 +29,7 @@ try:
     with open(args.path, "r") as f:
         data = json.load(f)
 except FileNotFoundError as e:
-    print("%", e)
+    print("#", e)
     exit(1)
 except json.decoder.JSONDecodeError as e:
     print(f"# Error reading '{args.path}', please check the formatting or re-export from Exif Notes")
@@ -65,9 +64,7 @@ if "filmStock" in data:
         comment_base += f'{data["filmStock"]["model"]} '
 
 # Get a dict mapping frame counts to frame data
-frame_data = dict()
-for frame in data["frames"]:
-    frame_data[int(frame["count"])] = frame
+frame_data = {int(frame["count"]): frame for frame in data["frames"]}
 
 last_matching_frame = None
 # Loop through all the images, building the command and then printing it
