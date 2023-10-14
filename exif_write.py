@@ -61,7 +61,7 @@ if "filmStock" in data:
     if "make" in data["filmStock"]:
         comment_base += f'{data["filmStock"]["make"]} '
     if "model" in data["filmStock"]:
-        comment_base += f'{data["filmStock"]["model"]} '
+        comment_base += f'{data["filmStock"]["model"]}'
 
 # Get a dict mapping frame counts to frame data
 frame_data = {int(frame["count"]): frame for frame in data["frames"]}
@@ -121,7 +121,7 @@ for i, image in image_list:
 
     comment = comment_base
     if "note" in frame and offset == 0:
-        comment += frame["note"]
+        comment += ", "+ frame["note"]
     
     if len(comment) > 0:
         cmd += f'-UserComment="{comment}" -ImageDescription="{comment}" '
