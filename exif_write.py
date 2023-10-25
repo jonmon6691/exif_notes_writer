@@ -74,6 +74,8 @@ for i, image in image_list:
     if i in frame_data:
         frame = frame_data[i]
         last_matching_frame = frame
+        last_matching_frame["shutter"] = None
+        last_matching_frame["aperture"] = None
     else:
         frame = last_matching_frame
 
