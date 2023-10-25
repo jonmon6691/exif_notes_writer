@@ -73,9 +73,9 @@ for i, image in image_list:
     # Try to get the matching frame data, if you don't have it, use the most recent
     if i in frame_data:
         frame = frame_data[i]
-        last_matching_frame = frame
-        last_matching_frame["shutter"] = None
-        last_matching_frame["aperture"] = None
+        last_matching_frame = frame.copy()
+        last_matching_frame.pop("shutter",  None)
+        last_matching_frame.pop("aperture", None)
     else:
         frame = last_matching_frame
 
