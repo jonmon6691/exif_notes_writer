@@ -106,7 +106,7 @@ for i, image in image_list:
     dt_string = dt.isoformat(sep=' ', timespec='minutes')
     cmd += f'-DateTime="{dt_string}" -DateTimeOriginal="{dt_string}" '
 
-    if "shutter" in frame:
+    if "shutter" in frame and frame["shutter"] != 'B':
         shutter_val = frame["shutter"].replace('"','')
         cmd += f'-ShutterSpeedValue="{shutter_val}" -ExposureTime="{shutter_val}" '
     
